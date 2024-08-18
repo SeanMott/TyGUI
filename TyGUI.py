@@ -55,7 +55,7 @@ Dep_Vulkan.VMA_INCLUDE_DIR, Dep_Vulkan.VK_BOOTSTRAP_INCLUDE_DIR, Dep_Vulkan.VULK
     premakeCode = premakeCode + Premake_Flags.GenerateFlagsString({"NoRuntimeChecks",
     "MultiProcessorCompile"})
 
-    Premake_BuildOptions.GenerateBuildOptionFlagsString("/utf-8")
+    premakeCode = premakeCode + Premake_BuildOptions.GenerateBuildOptionFlagsString({"/utf-8"})
 
     premakeCode = premakeCode + """
 
