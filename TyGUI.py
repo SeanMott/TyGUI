@@ -36,7 +36,7 @@ def GeneratePremake():
     premakeCode = premakeCode + KARProject.GenerateProjectHeaderString()
 
     KARProject.sourceFiles = []
-    Dep_ImGUI.AddSources_ImGUI(KARProject.sourceFiles) #adds the nessary premake files to the source directory
+    Dep_ImGUI.AddSources_ImGUI(KARProject.sourceFiles) #adds the nessary ImGUI files to the source directory
     premakeCode = premakeCode + KARProject.GenerateProjectSourceString()
 
     KARProject.includeDirs = {Dep_SDL.SDL_INCLUDE_DIR,
