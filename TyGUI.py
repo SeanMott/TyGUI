@@ -19,19 +19,27 @@ import Premake_Links
 import Premake_BuildOptions
 import Premake_Flags
 
+import BTDSTD
+
+#defines the link name
+PROJECT_NAME = "TyGUI"
+
+#defines the include directory
+PROJECT_INCLUDE_DIR = "TyGUI/includes"
+
 def GeneratePremake():
     premakeCode = ""
 
     #KAR main exe project
     KARProject = PremakeGen.Project()
-    KARProject.name = "TyGUI"
+    KARProject.name = PROJECT_NAME
     KARProject.kind = "StaticLib"
     KARProject.language = "C++"
         
     KARProject.location = "TyGUI"
     KARProject.desc = "The ImGUI implementation for handling ImGUI widgets in BTD projects"
 
-    KARProject.binaryOutput = PremakeGen.GenerateDefaultBinaryOutputPath() + "/BTD"
+    KARProject.binaryOutput = PremakeGen.GenerateDefaultBinaryOutputPath() + "/BTDSDK"
 
     premakeCode = premakeCode + KARProject.GenerateProjectHeaderString()
 
@@ -41,10 +49,11 @@ def GeneratePremake():
 
     KARProject.includeDirs = {Dep_SDL.SDL_INCLUDE_DIR,
 Dep_FMT.FMT_INCLUDE_DIR, Dep_GLM.GLM_INCLUDE_DIR, Dep_STB.STB_INCLUDE_DIR,
-Dep_Vulkan.VMA_INCLUDE_DIR, Dep_Vulkan.VK_BOOTSTRAP_INCLUDE_DIR, Dep_Vulkan.VULKAN_INCLUDE_DIR, Dep_ImGUI.IMGUI_INCLUDE_DIR}
+Dep_Vulkan.VMA_INCLUDE_DIR, Dep_Vulkan.VK_BOOTSTRAP_INCLUDE_DIR, Dep_Vulkan.VULKAN_INCLUDE_DIR, Dep_ImGUI.IMGUI_INCLUDE_DIR,
+    BTDSTD.PROJECT_INCLUDE_DIR}
     premakeCode = premakeCode + KARProject.GenerateProjectIncludeString()
 
-    premakeCode = premakeCode + Premake_Links.GenerateLinksString({Dep_Vulkan.VULKAN_LINK_DIR})
+    premakeCode = premakeCode + Premake_Links.GenerateLinksString({Dep_Vulkan.VULKAN_LINK_DIR, BTDSTD.PROJECT_NAME})
 
     premakeCode = premakeCode + Premake_Defines.GenerateDefinesString({
     "GLM_FORCE_RADIANS",
